@@ -70,10 +70,10 @@ const ContactForm = () => {
                 <h2>Contact</h2>
                 <p className="required">*Required</p>
                 <div>
-                  <label htmlFor="firstName">
+                  <label htmlFor="name">
                     <Field
                       id="name"
-                      name="firstName"
+                      name="name"
                       type="text"
                       placeholder="Name*"
                     />
