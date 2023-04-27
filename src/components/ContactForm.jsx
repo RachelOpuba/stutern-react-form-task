@@ -9,31 +9,18 @@ import { nanoid } from "nanoid";
 // import SuccessModal from "./SuccessModal";
 
 const initialValues = {
-  firstName: "",
-  lastName: "",
+  name: "",
   email: "",
   subject: "",
   message: "",
 };
 
 const validationSchema = Yup.object({
-  firstName: Yup.string().required("Required"),
-  lastName: Yup.string().required("Required"),
+  name: Yup.string().required("Required"),
   email: Yup.string().email("Invalid email format").required("Required"),
   message: Yup.string().required("Required"),
 });
 
-// const onSubmit = (values) => {
-//   alert(JSON.stringify(values, null, 2));
-// //   onsubmitProps.resetForm();
-//   const data = {
-//     id: 3,
-//     name: values.firstName,
-//     email: values.email,
-//     subject: values.subject,
-//     message: values.message,
-//   };
-// };
 const ContactForm = () => {
   const [successModal, setSuccessModal] = useState(undefined);
   const [errorModal, setErrorModal] = useState(undefined);
@@ -51,7 +38,7 @@ const ContactForm = () => {
             onSubmit={async (values, onsubmitProps) => {
               const data = {
                 id: nanoid(),
-                name: values.firstName,
+                name: values.name,
                 email: values.email,
                 subject: values.subject,
                 message: values.message,
@@ -85,25 +72,17 @@ const ContactForm = () => {
                 <div>
                   <label htmlFor="firstName">
                     <Field
-                      id="firstName"
+                      id="name"
                       name="firstName"
                       type="text"
-                      placeholder="First Name*"
+                      placeholder="Name*"
                     />
                   </label>
                 </div>
-                <ErrorMessage name="firstName" />
-                <div>
-                  <label htmlFor="lastName">
-                    <Field
-                      id="lastName"
-                      name="lastName"
-                      type="text"
-                      placeholder="Last Name*"
-                    />
-                  </label>
-                </div>
-                <ErrorMessage name="lastName" />
+                <ErrorMessage name="name">
+                  {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                </ErrorMessage>
+
                 <div>
                   <label htmlFor="email">
                     <Field
@@ -114,7 +93,9 @@ const ContactForm = () => {
                     />
                   </label>
                 </div>
-                <ErrorMessage name="email" />
+                <ErrorMessage name="email">
+                  {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                </ErrorMessage>
                 <div>
                   <label htmlFor="subject">
                     <Field
@@ -137,7 +118,9 @@ const ContactForm = () => {
                     />
                   </label>
                 </div>
-                <ErrorMessage name="message" />
+                <ErrorMessage name="message">
+                  {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                </ErrorMessage>
                 {isSubmitting ? (
                   <button type="submit" className="btn" disabled={isSubmitting}>
                     Loading.....
